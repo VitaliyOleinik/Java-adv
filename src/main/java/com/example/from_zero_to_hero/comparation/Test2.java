@@ -1,9 +1,6 @@
 package com.example.from_zero_to_hero.comparation;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class Test2 {
     public static void main(String[] args) {
@@ -16,13 +13,13 @@ public class Test2 {
         list.add(empl1);
         list.add(empl2);
         list.add(empl3);
-        Collections.sort(list);
+        Collections.sort(list, new SalaryComparator());
         System.out.println(list);
     }
 }
 
 class Employee
-        implements Comparable<Employee>
+//        implements Comparable<Employee>
 {
     int id;
     String name;
@@ -46,7 +43,7 @@ class Employee
                 '}';
     }
 
-    @Override
+    /*@Override
     public int compareTo(Employee anotherEmp) {
 //        if (this.id == anotherEmp.id) {
 //            return 0;
@@ -63,5 +60,35 @@ class Employee
             res = this.surname.compareTo(anotherEmp.surname);
         }
         return res;
+    }*/
+}
+
+class IdComparator implements Comparator<Employee> {
+
+    @Override
+    public int compare(Employee emp1, Employee emp2) {
+        if (emp1.id == emp2.id) {
+            return 0;
+        } else if (emp1.id < emp2.id) {
+            return -1;
+        } else {
+            return 1;
+        }
+    }
+}
+
+class NameComparator implements Comparator<Employee> {
+
+    @Override
+    public int compare(Employee emp1, Employee emp2) {
+        return emp1.name.compareTo(emp1.name);
+    }
+}
+
+class SalaryComparator implements Comparator<Employee> {
+
+    @Override
+    public int compare(Employee emp1, Employee emp2) {
+        return emp1.salaty - emp2.salaty;
     }
 }
