@@ -10,6 +10,19 @@ public class ParameterizedClass {
         System.out.println(info2);
         Integer i2 = info2.getValue();
     }
+
+//    public void abc(Info<String> info) {
+//        String s = info.getValue();
+//    }
+//
+//    public void abc(Info<Integer> info) {
+//        Integer s = info.getValue();
+//    }
+//
+//    // Exception abc(Info info)
+
+
+
 }
 
 class Info <T> {
@@ -24,3 +37,16 @@ class Info <T> {
         return value;
     }
 }
+
+//class Parent {
+//    public void abc(Info<String> info) {
+//        String s = info.getValue();
+//    }
+//}
+//
+//class Child extends Parent {
+//    public void abc(Info<Integer> info) {
+//        Integer s = info.getValue();
+//    }
+//}
+// Exception -> abc(Info info) in JVM code

@@ -5,6 +5,10 @@ import java.util.ArrayList;
 public class ParameterizedMethod {
     public static void main(String[] args) {
         ArrayList<Integer> al1 = new ArrayList<>();
+//        ArrayList al1 = new ArrayList();
+        int i = al1.get(0);
+//      int i = (Integer)al1.get(0);
+
         al1.add(12);
         al1.add(13);
         al1.add(14);
@@ -23,3 +27,5 @@ class GenMethod {
         return a1.get(1);
     }
 }
+
+// TYPE ERASURE -> стирание типов, Generics появились в Java 5
