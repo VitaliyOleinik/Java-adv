@@ -1,6 +1,7 @@
 package com.example.from_zero_to_hero.lambda;
 
 import java.util.ArrayList;
+import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 public class Test3 {
@@ -12,8 +13,16 @@ public class Test3 {
         return a1;
     }
 
+    public static void changeCar(Car car, Consumer<Car> carConsumer) {
+        carConsumer.accept(car);
+    }
+
     public static void main(String[] args) {
         ArrayList<Car> cars = createThreeCars(() -> new Car("Toyota", "white", 4.2));
+        System.out.println("Our cars: " + cars);
+        changeCar(cars.get(0), car -> {car.color = "black";
+                                       car.engine = 5.2;
+            System.out.println("Upgraded car: " + car);});
         System.out.println("Our cars: " + cars);
     }
 }
