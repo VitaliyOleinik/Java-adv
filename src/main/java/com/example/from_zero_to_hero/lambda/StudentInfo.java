@@ -3,12 +3,13 @@ package com.example.from_zero_to_hero.lambda;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.function.Predicate;
 
 public class StudentInfo {
 
-    void testStudents(ArrayList<Student> students, StudentChecks studentChecks) {
+    void testStudents(ArrayList<Student> students, Predicate<Student> predicate) {
         for (Student s : students) {
-            if (studentChecks.check(s)) {
+            if (predicate.test(s)) {
                 System.out.println(s);
             }
         }
@@ -28,14 +29,14 @@ public class StudentInfo {
 
         StudentInfo info = new StudentInfo();
         // not good example
-        info.testStudents(students, new CheckOverGrade());
+//        info.testStudents(students, new CheckOverGrade());
         // with anonymous class
-        info.testStudents(students, new StudentChecks() {
-            @Override
-            public boolean check(Student s) {
-                return s.age < 30;
-            }
-        });
+//        info.testStudents(students, new StudentChecks() {
+//            @Override
+//            public boolean check(Student s) {
+//                return s.age < 30;
+//            }
+//        });
         // with lambda
         info.testStudents(students, (Student student) -> {return student.age < 20;});
         // более короткий вариант
@@ -51,6 +52,12 @@ public class StudentInfo {
         Collections.sort(students, (stud1, stud2) -> stud1.course - stud2.course);
 
         StudentChecks sc = (Student student) -> {return student.age < 20;};
+
+        // Predicate
+        Predicate<Student> p1 = (Student student) -> student.age < 20;
+        Predicate<Student> p2 = (Student student) -> student.sex == 'm';
+
+        info.testStudents(students, p1.and(p2));
     }
 
     void printStudentOverGrade(ArrayList<Student> all, double grade) {
