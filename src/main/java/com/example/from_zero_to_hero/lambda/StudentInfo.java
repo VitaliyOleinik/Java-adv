@@ -3,7 +3,9 @@ package com.example.from_zero_to_hero.lambda;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.List;
 import java.util.function.Predicate;
+import java.util.function.Function;
 
 public class StudentInfo {
 
@@ -58,6 +60,25 @@ public class StudentInfo {
         Predicate<Student> p2 = (Student student) -> student.sex == 'm';
 
         info.testStudents(students, p1.and(p2));
+
+        double res1 = avgOfSmth(students, student -> student.avgGrade);
+        System.out.println("---------------------------------------");
+        System.out.println("Average of grades: " + res1);
+        double res2 = avgOfSmth(students, student -> (double) student.course);
+        System.out.println("Average of course: " + res2);
+        System.out.println("---------------------------------------");
+    }
+
+    // Пример с Function
+    Function<Student, Double> function = student -> student.avgGrade;
+
+    private static double avgOfSmth(List<Student> students, Function<Student, Double> function) {
+        double result = 0;
+        for (Student s: students) {
+            result += function.apply(s);
+        }
+        result = result / students.size();
+        return result;
     }
 
     void printStudentOverGrade(ArrayList<Student> all, double grade) {
