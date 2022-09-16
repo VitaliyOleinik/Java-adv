@@ -18,6 +18,16 @@ public class Test2 {
         students.add(student2);
         students.add(student3);
         students.add(student4);
+        System.out.println("----------------------------------------------");
+        students.stream().map(element ->
+        {
+            element.setName(element.getName().toUpperCase());
+            return element;
+        })
+                .filter(element -> element.getSex() == 'f')
+                .sorted((x, y) -> x.getAge() - y.getAge())
+                .forEach(element -> System.out.println(element));
+        System.out.println("----------------------------------------------");
 
         students = students.stream().sorted((x, y) -> x.getName().compareTo(y.getName())).collect(Collectors.toList());
         System.out.println("Sorted by name: " + students);
