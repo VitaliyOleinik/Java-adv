@@ -19,6 +19,9 @@ public class Test2 {
         students.add(student3);
         students.add(student4);
 
+        students = students.stream().sorted((x, y) -> x.getName().compareTo(y.getName())).collect(Collectors.toList());
+        System.out.println("Sorted by name: " + students);
+
         students = students.stream().filter(element ->
                 element.getAge() > 22 && element.getAvgGrade() < 8)
                 .collect(Collectors.toList());
