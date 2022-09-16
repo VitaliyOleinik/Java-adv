@@ -4,6 +4,7 @@ package com.example.from_zero_to_hero.stream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Test2 {
     public static void main(String[] args) {
@@ -22,6 +23,9 @@ public class Test2 {
                 element.getAge() > 22 && element.getAvgGrade() < 8)
                 .collect(Collectors.toList());
         System.out.println(students);
+
+        Stream<Student> myStream = Stream.of(student1, student2, student3, student4);
+        List<Student> newList = myStream.filter(element -> element.getAge() > 20 && element.getAge() < 44).collect(Collectors.toList());
     }
 
 }
