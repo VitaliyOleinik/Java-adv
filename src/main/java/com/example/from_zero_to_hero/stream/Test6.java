@@ -20,5 +20,9 @@ public class Test6 {
 
         Stream<Integer> stream5 = Stream.of(1,2,3,4,5,6,7,8,9,1,2,3,4,5);
         stream5.distinct().forEach(System.out::println);
+
+        System.out.println(stream5.count());
+        System.out.println(stream5.distinct().count());
+        // выведет ошибку, стримы нельзя переиспользовать!
     }
 }
