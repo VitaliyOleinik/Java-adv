@@ -2,6 +2,7 @@ package com.example.from_zero_to_hero.stream;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Test9 {
     public static void main(String[] args) {
@@ -19,6 +20,25 @@ public class Test9 {
         students.add(student4);
         students.add(student5);
         students.add(student6);
+
+        List<Integer> courses = students.stream()
+                .mapToInt(el->el.getCourse())
+                .boxed() // convert int to Integer
+                .collect(Collectors.toList());
+
+        System.out.println("list of courses: " + courses);
+
+        int sum = students.stream().mapToInt(el->el.getCourse()).sum();
+        System.out.println("Sum of courses: " + sum);
+
+        double average = students.stream().mapToInt(el->el.getCourse()).average().getAsDouble();
+        System.out.println("average: " + average);
+
+        int min = students.stream().mapToInt(el->el.getCourse()).min().getAsInt();
+        System.out.println("min: " + min);
+
+        int max = students.stream().mapToInt(el->el.getCourse()).max().getAsInt();
+        System.out.println("max: " + max);
 
 //        Student min = students.stream().min((x,y)-> x.getAge() - y.getAge()).get();
 //        System.out.println(min);
