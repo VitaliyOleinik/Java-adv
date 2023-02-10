@@ -1,15 +1,15 @@
 package com.example.from_zero_to_hero.multithreading;
 
-public class Ex2 {
+public class Ex3 {
     public static void main(String[] args) {
-        MyThread1 myThread1 = new MyThread1();
-        MyThread2 myThread2 = new MyThread2();
-        myThread1.start();
-        myThread2.start();
+        Thread thread1 = new Thread(new MyThread3());
+        Thread thread2 = new Thread(new MyThread4());
+        thread1.start();
+        thread2.start();
     }
 }
 
-class MyThread1 extends Thread {
+class MyThread3 implements Runnable {
     public void run() {
         for (int i = 0; i < 1000; i++) {
             System.out.println(i);
@@ -17,7 +17,7 @@ class MyThread1 extends Thread {
     }
 }
 
-class MyThread2 extends Thread {
+class MyThread4 implements Runnable {
     public void run() {
         for (int i = 1000; i > 0; i--) {
             System.out.println(i);
