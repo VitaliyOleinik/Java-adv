@@ -1,9 +1,7 @@
 package com.example.from_zero_to_hero.stream;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.IntSummaryStatistics;
-import java.util.List;
+import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class Examples {
@@ -70,4 +68,59 @@ class FlatMap {
         System.out.println("Players playing in world cup 2016");
         System.out.println(listOfAllPlayers);
     }
+}
+
+class Book {
+    int id;
+    String name;
+    String author;
+
+    public Book() {
+    }
+
+    public Book(int id, String name, String author) {
+        this.id = id;
+        this.name = name;
+        this.author = author;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+}
+
+class ConvertListToMap {
+    List<Book> books = new ArrayList<>();
+
+    Map<Integer, Book> result = books.stream()
+            .collect(Collectors.toMap(book->book.id, book -> book));
+
+    Map<Integer, Book> result1 = books.stream()
+            .collect(Collectors.toMap(Book::getId, Function.identity()));
+
+    List cards = Arrays.asList("Visa", "MasterCard", "American Express", "Visa");
+
+    Object cards2Length = cards.stream()
+            .collect(Collectors.toMap(Function.identity(), String::length));
+
 }
