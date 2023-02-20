@@ -118,9 +118,32 @@ class ConvertListToMap {
     Map<Integer, Book> result1 = books.stream()
             .collect(Collectors.toMap(Book::getId, Function.identity()));
 
-    List cards = Arrays.asList("Visa", "MasterCard", "American Express", "Visa");
 
-    Object cards2Length = cards.stream()
-            .collect(Collectors.toMap(Function.identity(), String::length));
+
+    public static void main(String[] args) {
+        List cards = Arrays.asList("Visa", "MasterCard", "American Express", "Visa");
+
+        Object cards2Length = cards.stream()
+                .collect(Collectors.toMap(Function.identity(), String::length));
+
+        System.out.println("list: " + cards);
+
+        Map mapCards2Length = (Map) cards.stream()
+                .collect(Collectors.toMap(Function.identity(),
+                        String::length, (e1, e2) -> e1));
+
+        System.out.println("map: " + mapCards2Length);
+
+        List<String> hostingProviders = Arrays.asList("Bluehost", "GoDaddy",
+                "Amazon AWS", "LiquidWeb", "FatCow");
+        System.out.println("list: " + hostingProviders);
+
+        Map<String, Integer> mapInitCards2Length = hostingProviders.stream()
+                .collect(Collectors.toMap(Function.identity(),
+                        String::length,
+                        (e1, e2) -> e1,
+                        LinkedHashMap::new));
+        System.out.println("map: " + mapInitCards2Length);
+    }
 
 }
