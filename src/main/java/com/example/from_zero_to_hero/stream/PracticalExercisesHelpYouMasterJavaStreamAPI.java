@@ -49,6 +49,15 @@ public class PracticalExercisesHelpYouMasterJavaStreamAPI {
                 .collect(Collectors.toList());
 
         System.out.println("listOfAllChars = " + listOfAllChars);
+        //////////////////////////////////////////////////////////////////////
+        String[][] array = new String[][]{{"a", "b"}, {"c", "d"}, {"e", "f"}};
+
+        List<String> collect = Stream.of(array)     // Stream<String[]>
+                .flatMap(Stream::of)                // Stream<String>
+                .filter(x -> !"a".equals(x))        // filter out the a
+                .collect(Collectors.toList());      // return a List
+
+        collect.forEach(System.out::println);
 
 
     }
