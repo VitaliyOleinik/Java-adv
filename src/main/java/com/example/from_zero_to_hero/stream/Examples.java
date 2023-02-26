@@ -8,6 +8,7 @@ import java.nio.file.Paths;
 import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class Examples {
@@ -176,5 +177,22 @@ class FlatMapExample3 {
         long noOfWords = words.count();
 
         System.out.println(noOfWords);  // 16
+    }
+}
+
+class FlatMapExample4 {
+
+    public static void main(String[] args) {
+
+        int[] array = {1, 2, 3, 4, 5, 6};
+
+        //Stream<int[]>
+        Stream<int[]> streamArray = Stream.of(array);
+
+        //Stream<int[]> -> flatMap -> IntStream
+        IntStream intStream = streamArray.flatMapToInt(x -> Arrays.stream(x));
+
+        intStream.forEach(x -> System.out.println(x));
+
     }
 }
