@@ -9,6 +9,7 @@ import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.LongStream;
 import java.util.stream.Stream;
 
 public class Examples {
@@ -194,5 +195,15 @@ class FlatMapExample4 {
 
         intStream.forEach(x -> System.out.println(x));
 
+    }
+
+    private void exampleLongStream() {
+        long[] array = {1, 2, 3, 4, 5, 6};
+
+        Stream<long[]> longArray = Stream.of(array);
+
+        LongStream longStream = longArray.flatMapToLong(x -> Arrays.stream(x));
+
+        System.out.println(longStream.count());
     }
 }
