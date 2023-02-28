@@ -207,3 +207,50 @@ class FlatMapExample4 {
         System.out.println(longStream.count());
     }
 }
+
+class Human {
+    private final String name;
+    private final List<String> pets;
+
+    public Human(String name, List<String> pets) {
+        this.name = name;
+        this.pets = pets;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public List<String> getPets() {
+        return pets;
+    }
+}
+
+class ExampleFlatMap {
+    public static void main(String[] args) {
+        List<Human> humans = List.of(
+                new Human("Sam", List.of("Buddy", "Lucy")),
+                new Human("Bob", List.of("Frankie", "Rosie")),
+                new Human("Marta", List.of("Simba", "Tilly")));
+
+        List<String> petNames = humans.stream()
+                .map(human -> human.getPets()) //преобразовываем Stream<Human> в Stream<List<Pet>>
+                .flatMap(pets -> pets.stream())//"разворачиваем" Stream<List<Pet>> в Stream<Pet>
+                .collect(Collectors.toList());
+
+        System.out.println(petNames); // output [Buddy, Lucy, Frankie, Rosie, Simba, Tilly]
+    }
+
+    public static void streamFlatMap() {
+        List<Human> humans = List.of(
+                new Human("Sam", List.of("Buddy", "Lucy")),
+                new Human("Bob", List.of("Frankie", "Rosie")),
+                new Human("Marta", List.of("Simba", "Tilly")));
+
+        List<String> petNames = humans.stream()
+                .flatMap(human -> human.getPets().stream())
+                .collect(Collectors.toList());
+
+        System.out.println(petNames); // output [Buddy, Lucy, Frankie, Rosie, Simba, Tilly]
+    }
+}
