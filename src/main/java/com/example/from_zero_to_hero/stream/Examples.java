@@ -253,4 +253,38 @@ class ExampleFlatMap {
 
         System.out.println(petNames); // output [Buddy, Lucy, Frankie, Rosie, Simba, Tilly]
     }
+
+    private class Product {
+        private double price;
+
+        public Product() {
+        }
+
+        public Product(double price) {
+            this.price = price;
+        }
+
+        public double getPrice() {
+            return price;
+        }
+
+        public void setPrice(double price) {
+            this.price = price;
+        }
+    }
+
+    public void streamOfCollection() {
+        var productList = List.of(new Product(),new Product(),new Product(),new Product(),new Product());
+        Stream<Product> streamOfCollection = productList.parallelStream();
+        boolean isParallel = streamOfCollection.isParallel();
+        boolean bigPrice = streamOfCollection
+                .map(product -> product.getPrice() * 12)
+                .anyMatch(price -> price > 200);
+
+        IntStream intStreamParallel = IntStream.range(1, 150).parallel();
+        boolean isParallel1 = intStreamParallel.isParallel();
+
+        IntStream intStreamSequential = intStreamParallel.sequential();
+        boolean isParallel3 = intStreamSequential.isParallel();
+    }
 }
