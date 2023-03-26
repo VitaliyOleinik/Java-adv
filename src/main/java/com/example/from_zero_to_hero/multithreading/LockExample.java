@@ -31,7 +31,7 @@ public class LockExample {
 }
 
 class Call {
-    private Lock lock = new ReentrantLock();
+    private final Lock lock = new ReentrantLock();
 
     void mobileCall() {
         lock.lock();
