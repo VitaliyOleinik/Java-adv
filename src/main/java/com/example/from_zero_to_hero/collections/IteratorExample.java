@@ -3,7 +3,7 @@ package com.example.from_zero_to_hero.collections;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class IterableExample {
+public class IteratorExample {
     public static void main(String[] args) {
         ArrayList<String> arrayList = new ArrayList<>();
         arrayList.add("Name1");
