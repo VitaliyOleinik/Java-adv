@@ -58,6 +58,9 @@ public class Regex2 {
 
         Matcher matcher = pattern1.matcher(s1);
 
+//        Boolean a = Pattern.compile("\\w+").matcher(s1).find();
+//        System.out.println(a);
+
         while (matcher.find()) {
             System.out.println("Position: " + matcher.start() + "   " + matcher.group());
         }
