@@ -4,7 +4,7 @@ public class Employee {
     public int id;
     public String name;
     public String department;
-    private double salary;
+    private double salary = 5000.50;
 
     public Employee() {}
 
@@ -14,20 +14,20 @@ public class Employee {
         this.department = department;
     }
 
-    public Employee(int id, String name, String department, double salary) {
+    /*public Employee(int id, String name, String department, double salary) {
         this.id = id;
         this.name = name;
         this.department = department;
         this.salary = salary;
-    }
+    }*/
 
-    public double getSalary() {
+    /*public double getSalary() {
         return salary;
     }
 
     public void setSalary(double salary) {
         this.salary = salary;
-    }
+    }*/
 
     private void changeDepartment(String newDepartment) {
         department = newDepartment;
