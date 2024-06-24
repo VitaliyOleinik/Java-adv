@@ -12,47 +12,54 @@ public class WaitNotifyExample {
     }
 }
 
-class Market{
+class Market {
     private int breadCount = 0;
+    private final Object lock = new Object();
 
-    public synchronized void getBread() {
-        while (breadCount < 1) {
-            try {
-                wait();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+    public /*synchronized*/ void getBread() {
+        synchronized (lock) {
+            while (breadCount < 1) {
+                try {
+                    System.out.println("Жду хлеб");
+                    lock.wait();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
+            breadCount--;
+            System.out.println("Потребитель купил 1 хлеб");
+            System.out.println("количество хлеба в магазе " + breadCount);
+            lock.notify();
         }
-        breadCount--;
-        System.out.println("Потребитель купил 1 хлеб");
-        System.out.println("количество хлеба в магазе " + breadCount);
-        notify();
     }
 
-    public synchronized void putBread() {
-        while (breadCount >= 5) {
-            try {
-                wait();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+    public /*synchronized*/ void putBread() {
+        synchronized (lock) {
+            while (breadCount >= 5) {
+                try {
+                    lock.wait();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
+            breadCount++;
+            System.out.println("Производитель добавил 1 хлеб");
+            System.out.println("количество хлеба в магазе " + breadCount);
+            lock.notify();
         }
-        breadCount++;
-        System.out.println("Производитель добавил 1 хлеб");
-        System.out.println("количество хлеба в магазе " + breadCount);
-        notify();
     }
 }
 
 class Producer implements Runnable {
     Market market;
+
     Producer(Market market) {
         this.market = market;
     }
 
     @Override
     public void run() {
-        for (int i = 0; i < 10; i ++) {
+        for (int i = 0; i < 10; i++) {
             market.putBread();
         }
     }
@@ -61,13 +68,14 @@ class Producer implements Runnable {
 // потребитель
 class Consumer implements Runnable {
     Market market;
+
     Consumer(Market market) {
         this.market = market;
     }
 
     @Override
     public void run() {
-        for (int i = 0; i < 10; i ++) {
+        for (int i = 0; i < 10; i++) {
             market.getBread();
         }
     }

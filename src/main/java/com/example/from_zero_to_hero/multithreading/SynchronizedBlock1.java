@@ -23,6 +23,7 @@ class MyRunnableImpl2 implements Runnable {
     }
 
     private void doWork1() {
+        // объект чей монитор будет занят
         synchronized (this) {
             Counter2.count++;
             System.out.println(Counter2.count);
