@@ -4,11 +4,12 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class Bankomat {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         Lock lock = new ReentrantLock();
         new Employee("Zaur", lock);
         new Employee("Vit", lock);
         new Employee("Zan", lock);
+        Thread.sleep(7000);
         new Employee("Art", lock);
         new Employee("Dan4ik", lock);
     }
@@ -26,16 +27,20 @@ class Employee extends Thread {
 
     @Override
     public void run() {
-        try {
-            System.out.println(name + " ждёт ");
-            lock.lock();
-            System.out.println(name + " пользуется банкоматом ");
-            Thread.sleep(2000);
-            System.out.println(name + " работник завершил свои дела ");
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } finally {
-            lock.unlock();
+        if (lock.tryLock()) {
+            try {
+                System.out.println(name + " ждёт ");
+                lock.lock();
+                System.out.println(name + " пользуется банкоматом ");
+                Thread.sleep(2000);
+                System.out.println(name + " работник завершил свои дела ");
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } finally {
+                lock.unlock();
+            }
+        } else {
+            System.out.println(name + " не хочет ждать в очереди и ушел!");
         }
     }
 }

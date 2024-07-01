@@ -11,7 +11,7 @@ public class DeadLock {
         thread20.start();
     }
 }
-
+// для deadlock нужно делать в разном порядке блоки с локом (1.2) и (2.1) = deadlock
 class Thread10 extends Thread {
     @Override
     public void run() {
