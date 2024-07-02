@@ -22,8 +22,10 @@ class InterruptedThread extends Thread {
             if (isInterrupted()) {
                 System.out.println("Поток хотят прервать");
                 System.out.println("Прерываем поток");
+                System.out.println("sqrtSum = " + sqrtSum);
                 return;
             }
+//            System.out.println("Произвожу операцию вычисления");
             sqrtSum += Math.sqrt(i);
         }
         System.out.println("sqrtSum = " + sqrtSum);
