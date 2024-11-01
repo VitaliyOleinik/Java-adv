@@ -1,6 +1,5 @@
 package com.example.from_zero_to_hero.collections.thread_safe;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -13,8 +12,8 @@ public class CopyOnWriteArrayListEx {
         list.add("Ivan");
         list.add("Antony");
         list.add("John");
-        System.out.println(list)
-        ;
+        System.out.println(list);
+
         Runnable runnable1 = () -> {
             Iterator<String> iterator = list.iterator();
             while (iterator.hasNext()) {
