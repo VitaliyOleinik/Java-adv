@@ -1,9 +1,10 @@
-package com.example.from_zero_to_hero.nested_classes.static_nested_class ;
+package com.example.from_zero_to_hero.nested_classes.static_nested_class;
 
 public class Car {
     String color;
     String doorCount;
     Engine engine;
+    private static int a;
 
     public Car(String color, String doorCount, Engine engine) {
         this.color = color;
@@ -24,6 +25,7 @@ public class Car {
         int horsePower;
 
         public Engine(int horsePower) {
+            System.out.println(a);
             this.horsePower = horsePower;
         }
 
