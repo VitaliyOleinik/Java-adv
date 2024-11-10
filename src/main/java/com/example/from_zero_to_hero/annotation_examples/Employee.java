@@ -29,7 +29,7 @@ public class Employee {
 }
 
 @Target({ElementType.METHOD, ElementType.TYPE})
-@Retention(RetentionPolicy.CLASS) // жизненный цикл
+@Retention(RetentionPolicy.RUNTIME) // жизненный цикл
 @interface MyAnnotation {
 
 }
